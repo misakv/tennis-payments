@@ -13,8 +13,15 @@ home_frame.grid(row=0, column=0, sticky="news")
 
 
 def back():
-    """I would like to this function to clean everything."""
+    """Funkce smaže label a entry."""
     lbl.pack_forget()
+    ent.pack_forget()
+
+    global IS_CLICKED_NEW_PAYMENT
+    global IS_CLICKED_BILANCE
+
+    IS_CLICKED_NEW_PAYMENT = False
+    IS_CLICKED_BILANCE = False
 
 
 def raise_frame(frame):
@@ -26,7 +33,8 @@ def raise_new_payment():
     """Funkce pro zadání nové platby za tenis."""
     global IS_CLICKED_NEW_PAYMENT
     if not IS_CLICKED_NEW_PAYMENT:
-        tk.Entry().grid()
+        ent.config()
+        ent.pack()
         IS_CLICKED_NEW_PAYMENT = True
     else:
         pass
@@ -71,6 +79,6 @@ zpet.pack(pady=10)
 raise_frame(home_frame)
 
 lbl = tk.Label(home_frame)
-
+ent = tk.Entry(home_frame)
 
 root.mainloop()

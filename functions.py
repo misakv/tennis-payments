@@ -1,4 +1,4 @@
-"""Module s funkcemi"""
+"""Module s pomocnými funkcemi."""
 from datetime import date
 
 
