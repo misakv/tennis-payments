@@ -1,6 +1,8 @@
 """Module pro vykreslení GUI"""
 
 import tkinter as tk
+
+import api
 import functions
 
 root = tk.Tk()
@@ -46,7 +48,7 @@ def raise_bilance():
     if not IS_CLICKED_BILANCE:
         text_label = (
             f"Stav bilance k {functions.current_date()} \n"
-            + "Marek dluží Vojtovi $1.000.000"
+            + f"Marek dluží Vojtovi fakt hodně prachů."
         )
 
         lbl.config(text=text_label)
