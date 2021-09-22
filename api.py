@@ -5,7 +5,7 @@ import pickle
 
 import pandas as pd
 from google.auth.transport.requests import Request
-from google_auth_oauthlib.flow import Flow, InstalledAppFlow
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -52,6 +52,21 @@ main()
 df = pd.DataFrame(values_input[1:], columns=values_input[0])
 
 
-def get_value(dataframe, x, y):
-    """Pokusna funkce vrati hodnotu na souradnicich x, y v dataframe."""
-    return dataframe.iat[x, y]
+def get_player(dataframe: pd.DataFrame) -> tuple:
+    """Funkce vrátí dvojici jmen ve formátu
+    dluh, dlužník (1. pád) , věřitel (3. pád)"""
+    vojta = 0
+    marek = 0
+    for index in range(0, len(df)):
+
+        if df.iat[index, 6] == "Marek":
+            marek += int(df.iat[index, 5])
+
+        else:
+            vojta += int(df.iat[index, 5])
+
+    dluh = abs(vojta - marek)
+    veritel = "Vojtovi" if vojta >= marek else "Markovi"
+    dluznik = "Marek" if veritel == "Vojtovi" else "Vojta"
+
+    return dluh, dluznik, veritel

@@ -1,5 +1,4 @@
 """Module pro vykreslení GUI"""
-
 import tkinter as tk
 
 import api
@@ -46,10 +45,19 @@ def raise_bilance():
     """Funkce vypíše stav bilance k aktuálnímu dni."""
     global IS_CLICKED_BILANCE
     if not IS_CLICKED_BILANCE:
-        text_label = (
-            f"Stav bilance k {functions.current_date()} \n"
-            + f"Marek dluží Vojtovi fakt hodně prachů."
-        )
+
+        dluh, dluznik, veritel = api.get_player(api.df)
+
+        if dluh == 0:
+            text_label = (
+                f"Stav bilance k {functions.current_date()} \n"
+                + "Nikdo nikomu nic nedluží!."
+            )
+        else:
+            text_label = (
+                f"Stav bilance k {functions.current_date()} \n"
+                + f"{dluznik} dluží {veritel} {dluh} CZK."
+            )
 
         lbl.config(text=text_label)
         lbl.pack()
